@@ -6,3 +6,4 @@ export interface Olheiro {
   criadoEm: Timestamp;
   planoPremium: boolean;
 }
+  

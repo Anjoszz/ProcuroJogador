@@ -19,6 +19,7 @@ interface Jogador {
   whatsapp: string;
   imagemUrl: string;
   videos?: string[] | string;
+  planoPremium: boolean;
 }
 
 export default function PerfilJogadorPage() {
@@ -62,7 +63,11 @@ export default function PerfilJogadorPage() {
         )}
 
         {/* Informações alinhadas à esquerda */}
-        <h2 className="text-2xl font-bold mb-4 text-center">{jogador.nome}</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center flex items-center justify-center gap-2">
+        {jogador.nome}
+        {jogador.planoPremium && <span className="text-yellow-400 text-2xl">★</span>}
+        </h2>
+
         <div className="space-y-2 text-sm sm:text-base">
           <p><i className="bx bx-calendar"></i> <strong>Idade:</strong> {jogador.idade} anos</p>
           <p><i className="bx bx-ruler"></i> <strong>Altura:</strong> {jogador.altura} m</p>
