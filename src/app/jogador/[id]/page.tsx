@@ -46,41 +46,98 @@ export default function PerfilJogadorPage() {
     ? [jogador.videos]
     : [];
 
+  const whatsappLink = `https://wa.me/${jogador.whatsapp.replace(/\D/g, '')}?text=Ol%C3%A1%2C%20vi%20seu%20perfil%20no%20Procuro%20Jogador%20e%20gostaria%20de%20conversar.`;
+
   return (
     <div className="min-h-screen bg-white text-[#3a5550]">
       <Navbar />
 
       <div className="max-w-4xl mx-auto px-4 pt-28 pb-16">
-        {/* Imagem no topo, centralizada */}
         {jogador.imagemUrl && (
           <div className="w-full flex justify-center mb-6">
             <img
               src={jogador.imagemUrl}
               alt={`Foto de ${jogador.nome}`}
-              className="w-40 h-40 object-cover rounded-full"
+              className="w-40 h-40 object-cover rounded-full border-4 border-white shadow"
             />
           </div>
         )}
 
-        {/* Informações alinhadas à esquerda */}
-        <h2 className="text-2xl font-bold mb-4 text-center flex items-center justify-center gap-2">
-        {jogador.nome}
-        {jogador.planoPremium && <span className="text-yellow-400 text-2xl">★</span>}
+        <h2 className="text-2xl font-bold mb-6 text-center flex items-center justify-center gap-2">
+          {jogador.nome}
+          {jogador.planoPremium && <span className="text-yellow-400 text-2xl">★</span>}
         </h2>
 
-        <div className="space-y-2 text-sm sm:text-base">
-          <p><i className="bx bx-calendar"></i> <strong>Idade:</strong> {jogador.idade} anos</p>
-          <p><i className="bx bx-ruler"></i> <strong>Altura:</strong> {jogador.altura} m</p>
-          <p><i className="bx bx-dumbbell"></i> <strong>Peso:</strong> {jogador.peso} kg</p>
-          <p><i className="bx bx-football"></i> <strong>Posição:</strong> {jogador.posicao}</p>
-          <p><i className="bx bx-walk"></i> <strong>Perna dominante:</strong> {jogador.perna}</p>
-          <p><i className="bx bx-map"></i> <strong>Localização:</strong> {jogador.cidade}, {jogador.estado}</p>
-          <p><i className="bx bxl-whatsapp"></i> <strong>WhatsApp:</strong> {jogador.whatsapp}</p>
-        </div>
+        <section className="bg-gray-50 border rounded-xl p-5 mb-6 shadow-sm">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-xl">📏</span>
+            <h3 className="font-semibold text-lg">Dados físicos</h3>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
+            <div className="bg-white rounded-md shadow-sm p-4 flex flex-col items-center">
+              <i className="bx bx-calendar text-3xl mb-2"></i>
+              <p className="text-sm text-gray-600">Idade</p>
+              <p className="font-bold text-base">{jogador.idade} anos</p>
+            </div>
+            <div className="bg-white rounded-md shadow-sm p-4 flex flex-col items-center">
+              <i className="bx bx-ruler text-3xl mb-2"></i>
+              <p className="text-sm text-gray-600">Altura</p>
+              <p className="font-bold text-base">{jogador.altura} m</p>
+            </div>
+            <div className="bg-white rounded-md shadow-sm p-4 flex flex-col items-center">
+              <i className="bx bx-dumbbell text-3xl mb-2"></i>
+              <p className="text-sm text-gray-600">Peso</p>
+              <p className="font-bold text-base">{jogador.peso} kg</p>
+            </div>
+          </div>
+        </section>
 
-        {/* Seção de vídeos */}
-        <div className="mt-10">
-          <h3 className="text-xl font-semibold mb-4">Vídeos</h3>
+        <section className="bg-gray-50 border rounded-xl p-5 mb-6 shadow-sm">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-xl">⚽</span>
+            <h3 className="font-semibold text-lg">Informações técnicas</h3>
+          </div>
+          <div className="grid grid-cols-2 gap-4 text-center">
+            <div className="bg-white rounded-md shadow-sm p-4 flex flex-col items-center">
+              <i className="bx bx-football text-3xl mb-2"></i>
+              <p className="text-sm text-gray-600">Posição</p>
+              <p className="font-bold text-base">{jogador.posicao}</p>
+            </div>
+            <div className="bg-white rounded-md shadow-sm p-4 flex flex-col items-center">
+              <i className="bx bx-walk text-3xl mb-2"></i>
+              <p className="text-sm text-gray-600">Perna dominante</p>
+              <p className="font-bold text-base">{jogador.perna}</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-gray-50 border rounded-xl p-5 mb-10 shadow-sm">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-xl">📍</span>
+            <h3 className="font-semibold text-lg">Localização e contato</h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+            <div className="bg-white rounded-md shadow-sm p-4 flex flex-col items-center">
+              <i className="bx bx-map text-3xl mb-2"></i>
+              <p className="text-sm text-gray-600">Cidade</p>
+              <p className="font-bold text-base">{jogador.cidade}, {jogador.estado}</p>
+            </div>
+            <div className="flex justify-center sm:justify-center">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-lg text-sm font-medium transition shadow"
+              >
+                <i className="bx bxl-whatsapp text-xl"></i>
+                Chamar no WhatsApp
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <div>
+          <h3 className="text-xl font-semibold mb-4">🎥 Vídeos</h3>
           {videosArray.length > 0 ? (
             videosArray.map((video: string, index: number) => {
               let videoId = '';
